@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<link rel="stylesheet" href="recipeStyle.css">
+
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <a href="#" class="logo">
+                    <i class="fas fa-utensils"></i>
+                    Recipe Store
+                </a>
+            </div>
+
+            <nav class="nav-links">
+                <a href="#" class="nav-link active">Home</a>
+                <a href="#" class="nav-link">Categories</a>
+                <a href="#" class="nav-link">Popular</a>
+                <a href="#" class="nav-link">New Recipes</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search recipes...">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+
+                <div class="cart-icon" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+
+                <!-- <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?name=John+Doe" alt="User" class="user-avatar">
+                    <span>John Doe</span>
+                </div> -->
+
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Add this after the header -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Discover & Cook <span class="highlight">Delicious</span> Recipes</h1>
+        <p>Explore thousands of recipes from around the world</p>
+        <div class="hero-search">
+            <input type="text" placeholder="Search for recipes, cuisines, or ingredients...">
+            <button><i class="fas fa-search"></i> Search</button>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <i class="fas fa-utensils"></i>
+                <span>1000+ Recipes</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-globe-americas"></i>
+                <span>50+ Cuisines</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-users"></i>
+                <span>100K+ Users</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="categories">
+    <div class="categories-container">
+        <h2>Popular Categories</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <div class="category-icon"><i class="fas fa-hamburger"></i></div>
+                <h3>Fast Food</h3>
+                <span>150+ Recipes</span>
+            </div>
+            <div class="category-card">
+                <div class="category-icon"><i class="fas fa-pizza-slice"></i></div>
+                <h3>Italian</h3>
+                <span>200+ Recipes</span>
+            </div>
+            <div class="category-card">
+                <div class="category-icon"><i class="fas fa-fish"></i></div>
+                <h3>Seafood</h3>
+                <span>120+ Recipes</span>
+            </div>
+            <div class="category-card">
+                <div class="category-icon"><i class="fas fa-leaf"></i></div>
+                <h3>Vegetarian</h3>
+                <span>180+ Recipes</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="cart-modal" id="cartModal" style="display: none;">
+    <h3>Shopping Cart</h3>
+        
+        <div id="cartItems">
+            <!-- Scrollable items will be here -->
+        </div>
+        
+        <div class="coupon-section">
+            <h4>Have a coupon?</h4>
+            <div class="coupon-input">
+                <input type="text" id="couponCode" placeholder="Enter coupon code">
+                <button class="apply-coupon" onclick="applyCoupon()">Apply</button>
+            </div>
+        </div>
+        
+        <div class="cart-summary">
+            <div class="cart-total">
+                <span>Subtotal:</span>
+                <span id="subtotal">$0.00</span>
+            </div>
+            <div class="cart-total" id="discountRow" style="display: none;">
+                <span>Discount:</span>
+                <span id="discount">-$0.00</span>
+            </div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="total">$0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <div class="container" id="recipeContainer">
+        <!-- Recipes will be loaded here -->
+    </div>
+
+
+
+
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- Main Footer -->
+            <div class="footer-grid">
+                <!-- About Section -->
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-utensils"></i>
+                        <span>Recipe Store</span>
+                    </div>
+                    <p class="footer-description">
+                        Discover delicious recipes from around the world. Cook with confidence and enjoy amazing meals.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+    
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Recipes</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Categories -->
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Breakfast</a></li>
+                        <li><a href="#">Lunch</a></li>
+                        <li><a href="#">Dinner</a></li>
+                        <li><a href="#">Desserts</a></li>
+                        <li><a href="#">Vegetarian</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Contact Info -->
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                        <p><i class="fas fa-envelope"></i> info@recipestore.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Cooking Street, Kitchen City, 12345</p>
+                    </div>
+                    <div class="newsletter">
+                        <h4>Subscribe to Newsletter</h4>
+                        <div class="newsletter-input">
+                            <input type="email" placeholder="Enter your email">
+                            <button><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Bottom Footer -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 Recipe Store. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="recipeScript.js"></script>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
